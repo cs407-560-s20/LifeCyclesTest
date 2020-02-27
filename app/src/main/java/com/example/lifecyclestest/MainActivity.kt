@@ -61,20 +61,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        // Save the state of program such as text in the editText when the states changes
+        // Save the state of program such as text in the textview when the states changes
         // such as due to flipping from portrait to landscape
         Log.d(TAG, "onSaveInstanceState was called")
-        outState.putString("test", editText.text.toString())
+        outState.putString("textTyped", text_typed.text.toString())
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         // Called when there is a saved instance that is previously
         // saved by using onSaveInstanceState()
-        // Set the value back to editText, which could be done in onCreate as well
+        // Set the value back to TextView, which could be done in onCreate as well
         Log.d(TAG, "onRestoreInstanceState was called")
-        val prevText = savedInstanceState?.getString("test", "")
-        editText.setText(prevText)
+        val previousText = savedInstanceState.getString("textTyped", "")
+        text_typed.text = previousText
     }
 
 
@@ -86,5 +86,9 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    fun enterTextButton(view: View) {
+        val textTyped = editText.text.toString()
+        text_typed.text = "You typed: $textTyped"
+    }
 
 }
